@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "buildCommand": "node --max-old-space-size=4096 node_modules/.bin/vite build",
+  "outputDirectory": "dist",
+  "framework": "vite",
+  "build": {
+    "env": {
+      "NODE_OPTIONS": "--max-old-space-size=4096"
+    }
+  }
+}
