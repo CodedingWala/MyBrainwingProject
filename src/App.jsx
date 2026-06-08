@@ -7,7 +7,7 @@ import { Loader } from '@react-three/drei'
 
 function App() {
   return (
-    <main className='w-full h-screen relative'>
+    <main className='w-full h-screen relative bg-[#1a0533]'>
        <Nav />
         <Routes>
         <Route path="/" element={ <Home/>} />
