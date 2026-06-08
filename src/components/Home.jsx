@@ -1,12 +1,12 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef, useState ,lazy, Suspense} from 'react'
 import { ScrollTrigger, SplitText } from 'gsap/all'
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
 import { useMedia, useSetState } from 'react-use'
 import { Canvas } from '@react-three/fiber'
 import { Fortune } from "./Fortune.jsx"
-import Fortune3D from './Fortune3D.jsx'
 import { GetContext } from '../context/ContextProvider.jsx'
+const Fortune3D = lazy(() => import('./Fortune3D.jsx'))
 gsap.registerPlugin(ScrollTrigger, SplitText)
 
 function Home() {
@@ -14,7 +14,7 @@ function Home() {
   // ✅ 6 refs — one per line instead of one per h1
   const hrefs = useRef([null, null, null, null, null, null])
   const cameraRef = useRef()
-  const cameraZRef = useRef({ z: 200 }) 
+  const cameraZRef = useRef({ z: 200 })
   const rotationRef = useRef({ y: 0 })
   const { builRef } = GetContext()
 
@@ -161,7 +161,9 @@ function Home() {
             <span ref={(el) => hrefs.current[5] = el} className='block' style={{ color: '#c4b5fd' }}>Every frame, unforgettable.</span>
           </h1>
 
-          <Fortune3D builRef={builRef} cameraRef={cameraRef} />
+          <Suspense fallback={null}>
+            <Fortune3D builRef={builRef} cameraRef={cameraRef} />
+          </Suspense>
 
         </div>
 
